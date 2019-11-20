@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>作業練習-時鐘</title>
+	<style>
+		body{
+			width:100vw;
+			text-align: center;
+		}
+		.clock{
+			position:sticky;
+			margin:0 auto;
+			height:80vh;
+			width:80vh;
+			/* background-color: rgba:11,11,11,5; */
+			background-color: rgb(150, 150,0);
+			border-radius: 50%;
+		}
+		#hour{
+			position:absolute;
+			/* display:table-cell; */
+			height:30%;
+			width:30%;
+			left:calc(50% - 15%);
+			top:calc(50% - 15%);
+			background-color: rgba(200,200,200,50%);
+			/* margin:0 auto; */
+			border-radius: 50%;
+			box-shadow: 10px 10px 5px rgba(150,150,150,50%);;
+			z-index: 15;
+		}
+		#hour>div{
+			position:absolute;
+			font-family: "微軟正黑體";
+			font-size:2.5em;
+			display:table-cell;
+			text-align: center;
+			vertical-align: middle;
+		}
+		#hour .twelve{
+			left:calc(50% - .6em);
+			top:0;
+		}
+		#hour .six{
+			left:calc(50% - .3em);
+			bottom:0;
+		}
+		#hour .three{
+			left:0;
+			top:calc(50% - .7em);
+		}
+		#hour .nine{
+			right:0;
+			top:calc(50% - .7em);
+		}
+		#minunt{
+			position:absolute;
+			height:70%;
+			width:70%;
+			left:calc(50% - 35%);
+			top:calc(50% - 35%);
+			background-color: rgba(0,150,150,100%);
+			/* margin:0 auto; */
+			border-radius: 50%;
+			box-shadow: 10px 10px 5px rgba(150,150,150,50%);;
+			z-index: 10;
+		}
+		#minunt>*{
+			position:absolute;
+			font-family: "微軟正黑體";
+			font-size:2.5em;
+			line-height: 2.5em;
+			display:block;
+			text-align: center;
+			/* vertical-align: middle; */
+		}
+		#minunt div{
+			/* background-color:rgba(255, 150,150,5); */
+			width:50%;
+			height:20%;
+			top:calc(50% - 10%);
+			left:50%;
+			transform-origin: left center; 
+			z-index: 12;
+			/* 排版用 */
+			/* background-color: aqua; */
+		}
+	
+		#minunt div .aaa{
+			position:absolute;
+			display:block;
+			height:100%;
+			width:70%;
+			right:0;
+			top:0;
+			line-height: 20px;
+			transform-origin: center center;
+		}
+		#minunt div .aaa::after{
+			position:absolute;
+			content:"1";
+			height:100%;
+			width:100%;
+			right:0;
+			line-height: 2.5em;
+		}
+			#minunt .one .aaa::after{
+			content:"1";
+		}
+			#minunt .three .aaa::after{
+			content:"3";
+		}
+			#minunt .five .aaa::after{
+			content:"5";
+		}
+			#minunt .seven .aaa::after{
+			content:"7";
+		}
+			#minunt .nine .aaa::after{
+			content:"9";
+		}
+			#minunt .eleven .aaa::after{
+			content:"11";
+		}
+		#minunt .one{
+			transform: rotate(-60deg);
+		}
+		#minunt .three{
+			transform: rotate(deg);
+		}
+		#minunt .five{
+			transform: rotate(60deg);
+		}
+		#minunt .seven{
+			transform: rotate(120deg);
+		}
+		#minunt .nine{
+			transform: rotate(180deg);
+		}
+		#minunt .eleven{
+			transform: rotate(240deg);
+		}
+		#minunt .one .aaa{
+			transform: rotate(60deg);
+		}
+		#minunt .three .aaa{
+			transform: rotate(0deg);
+		}
+		#minunt .five .aaa{
+			transform: rotate(-60deg);
+		}
+		#minunt .seven .aaa{
+			transform: rotate(-120deg);
+		}
+		#minunt .nine .aaa{
+			transform: rotate(-180deg);
+		}
+		#minunt .eleven .aaa{
+			transform: rotate(-240deg);
+		}
+
+		
+
+		/* .hour .temp{
+			width:100%;
+			height:6px;
+			top:calc(50% - 3px);
+			background-color: rgba(00,200,100,50%);
+		} */
+		#section1{
+			position:absolute;
+			height:4%;
+			width:10%;
+			left:calc(50% - 5%);
+			top:calc(50% - 2%);
+			z-index: 15;
+
+		}
+		#section1::before{
+			content: "";
+			display:block;
+			position:absolute;
+			height:100%;
+			width:70%;
+			left:30%;
+			/* top:calc(50%-20%); */
+			background-color:rgba(150,150,150,100%);
+			z-index: 0;
+			animation-name: s1b;
+			animation-duration: 0.5s;
+			z-index:2;
+		}
+		@keyframes s1b {
+			0%{
+				height:100%;
+				top:0;}
+			50%{height:120%;
+				top:-10%;}
+			100%{
+				height:100%;
+				top:0}
+		}
+		#section1::after{
+			content: "";
+			display:block;
+			position:absolute;
+			height:175%;
+			width:70%;
+			left:15%;
+			top:calc(50% - 87.5%);
+			/* left:0; */
+			/* right:calc(-50%-35%); */
+			background-color:rgba(100,100,100,100%);
+			z-index:1;
+		}
+		#section2{
+			position:absolute;
+			height:4%;
+			width:37%;
+			left:50%;
+			top:calc(50% - 2%);
+			/* background-color: rgba(0,150,150,100%); */
+			/* margin:0 auto; */
+			/* border-radius: 50%; */
+			/* box-shadow: 10px 10px 5px rgba(150,150,150,50%);; */
+			z-index: 14;
+			transform-origin: center center;
+		}
+		#section2::after{
+			content: "";
+			display:block;
+			position:absolute;
+			height:100%;
+			width:18%;
+			left:0;
+			/* right:0%; */
+			/* top:calc(50% - 4%); */
+			background-image:url(波動.png);
+			background-size: cover;
+			/* background-color:rgba(150,150,150,50%); */
+			/* margin:0 auto; */
+			/* border-radius: 50%; */
+			/* box-shadow: 10px 10px 5px rgba(150,150,150,50%);; */
+			z-index: 0;
+			animation-name: s2a;
+			animation-duration: 1.5s;
+		}
+		@keyframes s2a{
+			from{
+				left:0;
+				top:0;
+				/* z-index:-25; */
+
+				} 	
+			to{
+				left:100%;
+				/* top:calc(50% - 8%); */
+				/* z-index:-25; */
+			}
+		}
+		#section3{
+			position:absolute;
+			display:table-cell;
+			height:15%;
+			width:15%;
+			left:85%;
+			top:calc(50% - 7.5%);
+			font-size: 2.5em;
+			color:rgb(150, 150,0);
+			text-align: center;
+			line-height: 2.5em;
+			/* vertical-align: middle; */
+			z-index: 9;
+			animation-name: s3;
+			animation-duration: 1.8s;
+			animation-delay: 1.7s;
+
+		}
+		@keyframes s3 {
+			0%{	}
+			60%{ }
+			95%{
+				color:black;
+				font-size: 4em;
+				}
+			100%{
+				color:rgb(150, 150,0);
+			}
+		}
+		#section3::before{
+			content: "";
+			display:block;
+			position:absolute;
+			height:0%;
+			width:0%;
+			left:50%;
+			top:50%;
+			border-radius: 50%;
+			background-color:rgba(194, 170, 38,100);
+			box-shadow: 0 0 0 rgb(184, 214, 15);
+			z-index: 2;
+			animation-name: s3b;
+			animation-duration: 2.5s;
+			animation-delay: 1.3s;
+		}
+		@keyframes s3b {
+			0%{
+				height:0%;
+				width:0%;
+				left:50%;
+				top:50%;
+				}
+			40%{
+				background-color:rgba(194, 170, 38,100);
+			}
+			80%{
+				height:100%;
+				width:100%;
+				left:0%;
+				top:0%;
+				background-color:rgba(194, 170, 38,0);
+				box-shadow: 0 0 0 rgba(184, 214, 15,0);
+				z-index: 2;
+				}
+			100%{
+				box-shadow: 0 0 10 rgb(184, 214, 15);
+			
+			}
+		}
+	</style>
+</head>
+<body>
+	<h1>很難讀的鐘</h1>
+	<div class=clock>
+		<div id=hour>
+			<div class=twelve>12</div>
+			<div class=three>3</div>
+			<div class=six>6</div>
+			<div class=nine>9</div>
+			<div class=temp></div>
+		</div>
+		<div id=minunt>
+			<div class=one>
+				<div class=aaa></div>
+			</div>
+			<div class=three>
+				<div class=aaa></div>
+			</div>
+			<div class=five>
+				<div class=aaa></div>
+			</div>
+			<div class=seven>
+				<div class=aaa></div>
+			</div>
+			<div class=nine>
+				<div class=aaa></div>
+			</div>
+			<div class=eleven>
+				<div class=aaa></div>
+			</div>
+	
+			<!-- <div class=temp></div> -->
+		</div>
+		<div id=section1>	</div>
+		<div id=section2>	</div>
+		<div id=section3>55</div>
+	</div>
+	
+</body>
+<script>
+	let hour=document.getElementById("hour");
+	let minunt=document.getElementById("minunt");
+	let scetion1=document.getElementById("section1");
+	let mNumber=minunt.getElementsByTagName("div");
+	// console.log(mNumber);
+	// console.log(mNumber[0]);
+	
+	
+	let clock=function(){
+		let date=new Date();
+		let h =date.getHours();
+		let m =date.getMinutes();
+		// let m =30;
+		let s =date.getSeconds();
+		hour.style.transform=`rotate( ${h*30+m*0.5}deg)`;
+		minunt.style.transform=`rotate( ${m*(-6)}deg)`;
+		section1.style.transform=`rotate( ${s*(6)}deg)`;
+
+		for(i=0;i<6;i++){
+			let temp=mNumber[2*i].getElementsByTagName("div");
+			temp[0].style.transform=`rotate(${m*(6)+60-(60)*i}deg)`;
+		}
+		
+	
+}
+
+	clock();
+	setInterval(clock, 1000);
+
+
+</script>
+</html>
