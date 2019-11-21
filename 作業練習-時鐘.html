@@ -170,7 +170,7 @@
 			top:calc(50% - 3px);
 			background-color: rgba(00,200,100,50%);
 		} */
-		#section1{
+		.section1{
 			position:absolute;
 			height:4%;
 			width:10%;
@@ -179,7 +179,7 @@
 			z-index: 15;
 
 		}
-		#section1::before{
+		.section1::before{
 			content: "";
 			display:block;
 			position:absolute;
@@ -190,20 +190,22 @@
 			background-color:rgba(150,150,150,100%);
 			z-index: 0;
 			animation-name: s1b;
-			animation-duration: 0.5s;
+			animation-duration: 5s;
+			animation-iteration-count: infinite;
 			z-index:2;
 		}
 		@keyframes s1b {
 			0%{
 				height:100%;
 				top:0;}
-			50%{height:120%;
+			5%{height:120%;
 				top:-10%;}
-			100%{
+			10%{
 				height:100%;
 				top:0}
+			100%{}
 		}
-		#section1::after{
+		.section1::after{
 			content: "";
 			display:block;
 			position:absolute;
@@ -227,7 +229,7 @@
 			/* border-radius: 50%; */
 			/* box-shadow: 10px 10px 5px rgba(150,150,150,50%);; */
 			z-index: 14;
-			transform-origin: center center;
+			transform-origin: left center;
 		}
 		#section2::after{
 			content: "";
@@ -246,20 +248,31 @@
 			/* box-shadow: 10px 10px 5px rgba(150,150,150,50%);; */
 			z-index: 0;
 			animation-name: s2a;
-			animation-duration: 1.5s;
+			animation-duration: 5s;
+			animation-iteration-count: infinite;
 		}
 		@keyframes s2a{
-			from{
+			0%{
 				left:0;
 				top:0;
 				/* z-index:-25; */
 
 				} 	
-			to{
+			30%{
 				left:100%;
 				/* top:calc(50% - 8%); */
 				/* z-index:-25; */
+				/* width:0 */
+				width:18%;
+				height:100%;
 			}
+			31%{
+				width:0;
+				height:0;
+			}
+			100%{
+				left:100%;
+				width:0}
 		}
 		#section3{
 			position:absolute;
@@ -272,23 +285,27 @@
 			color:rgb(150, 150,0);
 			text-align: center;
 			line-height: 2.5em;
-			/* vertical-align: middle; */
-			z-index: 9;
+			vertical-align: middle;
+			z-index: 10;
 			animation-name: s3;
-			animation-duration: 1.8s;
-			animation-delay: 1.7s;
+			animation-duration: 5s;
+			animation-iteration-count: infinite;
+			transform-origin: -233% center;
 
 		}
 		@keyframes s3 {
 			0%{	}
-			60%{ }
-			95%{
+
+			40%{ color:rgb(150, 150,0);}
+			65%{}
+			67%{
 				color:black;
 				font-size: 4em;
 				}
-			100%{
+			70%{
 				color:rgb(150, 150,0);
 			}
+			90%{}
 		}
 		#section3::before{
 			content: "";
@@ -303,27 +320,28 @@
 			box-shadow: 0 0 0 rgb(184, 214, 15);
 			z-index: 2;
 			animation-name: s3b;
-			animation-duration: 2.5s;
-			animation-delay: 1.3s;
+			animation-duration: 5s;
+			animation-iteration-count: infinite;
 		}
 		@keyframes s3b {
-			0%{
+			0%{		}
+			30%{
 				height:0%;
 				width:0%;
 				left:50%;
 				top:50%;
-				}
-			40%{
 				background-color:rgba(194, 170, 38,100);
+				index:2;
 			}
-			80%{
+
+			60%{
 				height:100%;
 				width:100%;
 				left:0%;
 				top:0%;
-				background-color:rgba(194, 170, 38,0);
+				background-color:rgba(233, 207, 106,10);
 				box-shadow: 0 0 0 rgba(184, 214, 15,0);
-				z-index: 2;
+				z-index: -2;
 				}
 			100%{
 				box-shadow: 0 0 10 rgb(184, 214, 15);
@@ -364,7 +382,7 @@
 	
 			<!-- <div class=temp></div> -->
 		</div>
-		<div id=section1>	</div>
+		<div id=section1 class=section1>	</div>
 		<div id=section2>	</div>
 		<div id=section3>55</div>
 	</div>
@@ -373,9 +391,12 @@
 <script>
 	let hour=document.getElementById("hour");
 	let minunt=document.getElementById("minunt");
-	let scetion1=document.getElementById("section1");
+	let section1=document.getElementById("section1");
 	let mNumber=minunt.getElementsByTagName("div");
-	// console.log(mNumber);
+	let temp= section1.classList;
+	console.log(section1);
+	console.log(temp);
+
 	// console.log(mNumber[0]);
 	
 	
@@ -388,11 +409,18 @@
 		hour.style.transform=`rotate( ${h*30+m*0.5}deg)`;
 		minunt.style.transform=`rotate( ${m*(-6)}deg)`;
 		section1.style.transform=`rotate( ${s*(6)}deg)`;
-
 		for(i=0;i<6;i++){
 			let temp=mNumber[2*i].getElementsByTagName("div");
 			temp[0].style.transform=`rotate(${m*(6)+60-(60)*i}deg)`;
+		if(s%5==1){
+			
+			section2.style.an=`rotate( ${s*(6)}deg)`;	
+			section2.style.transform=`rotate( ${s*(6)}deg)`;	
+			section3.style.transform=`rotate( ${s*(6)}deg)`;	
 		}
+		
+		}
+
 		
 	
 }
